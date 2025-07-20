@@ -9,7 +9,7 @@
 </h3>
 
 <p align="center">
-  The complete MCP server for macOS with powerful toolboxes. Works with Claude Desktop, Cursor, Raycast, and any MCP-compatible AI.
+  Connect AI with any macOS app. Deep integration with native apps like Calendar, Mail, Notes, plus UI control for all applications. Works with Claude, Cursor, Raycast, and any MCP-compatible AI.
 </p>
 
 <p align="center">
