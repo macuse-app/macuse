@@ -21,7 +21,7 @@
   <a href="https://macuse.app/download/">Download</a> •
   <a href="#-features">Features</a> •
   <a href="#-quick-start">Quick Start</a> •
-  <a href="https://macuse.app">Website</a>
+  <a href="https://macuse.app">Website</a> •
   <a href="mailto:support@macuse.app">Support</a>
 </p>
 
