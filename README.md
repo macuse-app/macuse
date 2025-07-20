@@ -22,6 +22,7 @@
   <a href="#-features">Features</a> •
   <a href="#-quick-start">Quick Start</a> •
   <a href="https://macuse.app">Website</a>
+  <a href="mailto:support@macuse.app">Support</a>
 </p>
 
 ---
@@ -251,10 +252,6 @@ Use SSE mode for Raycast:
 }
 ```
 
-## Resources
-
-- [Issue Tracker](https://github.com/macuse-app/macuse/issues)
-- [Support](mailto:support@macuse.app)
 
 ---
 
