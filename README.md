@@ -18,10 +18,8 @@
 </p>
 
 <p align="center">
-  <a href="https://macuse.app/download/">Download</a> •
-  <a href="#-features">Features</a> •
-  <a href="#-quick-start">Quick Start</a> •
   <a href="https://macuse.app">Website</a> •
+  <a href="https://macuse.app/download/">Download</a> •
   <a href="mailto:support@macuse.app">Support</a>
 </p>
 
@@ -35,6 +33,8 @@ Macuse is a **native Mac app** that lets AI assistants like Claude, Cursor, and 
 - **Manage Calendar** - Create events, check availability, search schedules
 - **Work with Notes** - Create, update, and search Apple Notes
 - **Handle Reminders** - Manage tasks with priorities and due dates
+- **Manage Contacts** - Search, create, and update contact information
+- **Send Messages** - Send text messages and manage conversations
 - **Inspect Interfaces** - Extract text, find elements, analyze apps
 
 ## How It Works
@@ -74,6 +74,13 @@ AI: *Creates the note with content and sets up the reminder*
 ```
 You: "Fill out this form in Photoshop with the project details and save it as a PDF"
 AI: *Navigates the form, enters data, and exports as PDF*
+```
+
+### Contacts & Communication
+
+```
+You: "Find John Smith's contact info and send him a message about tomorrow's meeting"
+AI: *Searches contacts, finds John Smith, and sends the message via Messages*
 ```
 
 ### Multi-App Workflows
@@ -167,6 +174,23 @@ AI: *Reads calendar, creates organized note, composes and sends email*
 - `create_reminder` - Create new reminders
 - `update_reminder` - Update existing reminders
 - `delete_reminder` - Delete reminders
+
+### Contacts Management (7 tools)
+
+- `check_contacts_permission` - Check Contacts access permissions
+- `get_contacts` - Search contacts with filters
+- `get_contact` - Get detailed contact information
+- `create_contact` - Create new contacts
+- `update_contact` - Update existing contacts
+- `delete_contact` - Delete contacts
+- `get_contact_groups` - List contact groups
+
+### Messages Control (4 tools)
+
+- `check_messages_permission` - Check Messages access permissions
+- `get_messages` - Search messages with filters
+- `send_message` - Send text messages
+- `get_conversations` - List message conversations
 
 ### Security Features
 
