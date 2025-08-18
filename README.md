@@ -18,9 +18,10 @@
 </p>
 
 <p align="center">
-  <a href="https://macuse.app">Website</a> •
   <a href="https://macuse.app/download/">Download</a> •
-  <a href="mailto:support@macuse.app">Support</a>
+  <a href="#-features">Features</a> •
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="https://macuse.app">Website</a>
 </p>
 
 ---
@@ -29,12 +30,15 @@
 
 Macuse is a **native Mac app** that lets AI assistants like Claude, Cursor, and Raycast control your computer through the Model Context Protocol (MCP). Turn natural language commands into real actions:
 
-- **Control Any App** - Click buttons, type text, navigate interfaces
+- **Control Any App** - Click buttons, type text, navigate interfaces, take screenshots
 - **Manage Calendar** - Create events, check availability, search schedules
+- **Handle Contacts** - Search, access, and manage contact information
 - **Work with Notes** - Create, update, and search Apple Notes
 - **Handle Reminders** - Manage tasks with priorities and due dates
-- **Manage Contacts** - Search, create, and update contact information
-- **Send Messages** - Send text messages and manage conversations
+- **Send Messages** - Control Messages app, send texts, manage conversations
+- **Location Services** - Get current location, integrate with Maps
+- **Maps Integration** - Search locations, get directions, open in Maps
+- **Email Management** - Full Mail app control with advanced filtering
 - **Inspect Interfaces** - Extract text, find elements, analyze apps
 
 ## How It Works
@@ -76,11 +80,18 @@ You: "Fill out this form in Photoshop with the project details and save it as a 
 AI: *Navigates the form, enters data, and exports as PDF*
 ```
 
-### Contacts & Communication
+### Location & Maps
 
 ```
-You: "Find John Smith's contact info and send him a message about tomorrow's meeting"
-AI: *Searches contacts, finds John Smith, and sends the message via Messages*
+You: "Get my current location and find the nearest coffee shops, then give me directions to the highest rated one"
+AI: *Gets GPS location, searches nearby coffee shops, gets ratings and directions*
+```
+
+### Contacts & Messages
+
+```
+You: "Find John's contact info and send him a message about tomorrow's meeting"
+AI: *Searches contacts for John, opens Messages, sends the specified message*
 ```
 
 ### Multi-App Workflows
@@ -90,12 +101,33 @@ You: "Check my calendar, create a note with today's meetings, and send a summary
 AI: *Reads calendar, creates organized note, composes and sends email*
 ```
 
+## System Requirements
+
+### Minimum Requirements
+
+- **macOS**: 10.15 (Catalina) or later
+- **Hardware**: Intel Mac or Apple Silicon Mac
+- **RAM**: 4GB minimum, 8GB recommended
+- **Storage**: 100MB free disk space
+- **Internet**: Required for initial setup and AI client communication
+
+### Required Permissions
+
+Macuse requires the following macOS permissions to function properly:
+- **Accessibility**: Core requirement for UI control and app automation
+- **Calendar**: For calendar management features
+- **Contacts**: For contact search and management
+- **Reminders**: For task management features
+- **Location Services**: For location-based features (optional)
+
+### Compatible AI Clients
+
+- **Claude Desktop**: Full stdio and SSE support
+- **Cursor**: Full stdio support  
+- **Raycast AI**: Native SSE support
+- **Any MCP-compatible client**: Via stdio or SSE proxy
+
 ## Quick Start
-
-### Prerequisites
-
-- macOS 10.15 or later
-- Claude Desktop, Cursor, or any MCP-compatible AI client
 
 ### Get Started in 30 Seconds
 
@@ -107,11 +139,12 @@ AI: *Reads calendar, creates organized note, composes and sends email*
 
 ## Features
 
-### System Control (3 tools)
+### System Control (4 tools)
 
 - `get_running_apps` - Get all currently running macOS applications
 - `get_active_apps` - Get applications currently visible on screen
 - `launch_app` - Launch any macOS application by bundle ID
+- `get_bundle_id` - Get the bundle ID of an application by its name
 
 ### UI Inspector (4 tools)
 
@@ -140,7 +173,17 @@ AI: *Reads calendar, creates organized note, composes and sends email*
 - `update_calendar_event` - Modify existing events
 - `delete_calendar_event` - Remove calendar events
 
-### Mail Control (11 tools)
+### Contacts Management (3 tools)
+
+- `check_contacts_permission` - Check Contacts access permissions
+- `get_all_contacts` - Get all contacts from the address book
+- `search_contacts` - Search contacts by name, email, or other attributes
+
+### Location Services (1 tool)
+
+- `get_current_location` - Get the current GPS location
+
+### Mail Control (12 tools)
 
 - `check_mail_permission` - Check Mail app permissions
 - `get_mail_accounts` - List configured mail accounts
@@ -154,6 +197,21 @@ AI: *Reads calendar, creates organized note, composes and sends email*
 - `get_mailboxes` - List all mailboxes
 - `move_mail` - Move emails between mailboxes
 - `delete_mail` - Delete email messages
+
+### Maps Integration (4 tools)
+
+- `search_places` - Search for locations and places
+- `get_directions` - Get directions between locations
+- `explore_places` - Explore nearby places and points of interest
+- `calculate_eta` - Calculate estimated time of arrival
+
+### Messages Control (5 tools)
+
+- `check_messages_permission` - Check Messages app permissions
+- `search_chats` - Search for message conversations
+- `search_messages` - Search for specific messages
+- `get_chat` - Get details of a specific chat conversation
+- `send_message` - Send text messages via Messages app
 
 ### Notes Management (8 tools)
 
@@ -174,23 +232,6 @@ AI: *Reads calendar, creates organized note, composes and sends email*
 - `create_reminder` - Create new reminders
 - `update_reminder` - Update existing reminders
 - `delete_reminder` - Delete reminders
-
-### Contacts Management (7 tools)
-
-- `check_contacts_permission` - Check Contacts access permissions
-- `get_contacts` - Search contacts with filters
-- `get_contact` - Get detailed contact information
-- `create_contact` - Create new contacts
-- `update_contact` - Update existing contacts
-- `delete_contact` - Delete contacts
-- `get_contact_groups` - List contact groups
-
-### Messages Control (4 tools)
-
-- `check_messages_permission` - Check Messages access permissions
-- `get_messages` - Search messages with filters
-- `send_message` - Send text messages
-- `get_conversations` - List message conversations
 
 ### Security Features
 
@@ -261,7 +302,7 @@ Add to Cursor's MCP settings:
 
 ### Raycast AI
 
-Use SSE mode for Raycast:
+Raycast supports direct SSE connections:
 
 ```json
 {
@@ -276,6 +317,189 @@ Use SSE mode for Raycast:
 }
 ```
 
+### Other MCP Clients (SSE Mode)
+
+For clients that don't support SSE natively, use the `mcp-remote` proxy:
+
+```json
+{
+  "mcpServers": {
+    "macuse": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "http://127.0.0.1:35729/mcp",
+        "--transport",
+        "sse-only",
+        "--header",
+        "Authorization=Bearer your-token-here"
+      ]
+    }
+  }
+}
+```
+
+## Troubleshooting
+
+### Permissions Issues
+
+**Accessibility Permission Not Working**
+1. Go to **System Preferences** → **Security & Privacy** → **Privacy** → **Accessibility**
+2. Remove Macuse from the list if present
+3. Re-add Macuse by clicking the **+** button
+4. Restart Macuse
+
+**Calendar/Contacts/Reminders Access Denied**
+1. Go to **System Preferences** → **Security & Privacy** → **Privacy**
+2. Select the specific service (Calendar, Contacts, or Reminders)
+3. Check the box next to Macuse
+4. Restart Macuse if needed
+
+### Connection Issues
+
+**AI Client Can't Connect**
+- Verify your access token is correctly configured
+- For SSE mode, ensure port 35729 is not blocked by firewall
+- Check that Macuse is running and the token is valid
+- Restart both Macuse and your AI client
+
+**Token Authentication Failed**
+- Regenerate a new token in the Macuse app
+- Update your AI client configuration with the new token
+- Ensure there are no extra spaces in the token string
+
+**Port Conflicts (SSE Mode)**
+- If port 35729 is in use, stop other applications using it
+- Port 35729 is currently fixed and cannot be changed
+- Ensure no other applications are using this port
+
+### Performance Issues
+
+**Slow Response Times**
+- Close unnecessary applications to free up system resources
+- Check if multiple AI clients are making simultaneous requests
+- Restart Macuse if it becomes unresponsive
+
+**UI Automation Not Working**
+- Ensure the target application is running and visible
+- Some applications may require specific focus or window state
+- Try clicking on the target application first
+
+## Frequently Asked Questions
+
+### General Usage
+
+**Q: Can I use multiple AI clients with Macuse simultaneously?**
+A: Yes, Macuse supports concurrent connections from multiple AI clients. Each client will receive responses to their own requests.
+
+**Q: Is my data safe? Does Macuse send information to the cloud?**
+A: Macuse processes everything locally on your Mac. No data is sent to external servers. Your calendar, contacts, and other information stay on your device.
+
+**Q: How do I reset my access token?**
+A: Open the Macuse app, go to the Token section, and click "Generate New Token". Update your AI client configurations with the new token.
+
+**Q: Can Macuse work with apps that aren't mentioned in the feature list?**
+A: Yes! The UI Inspector and Interaction tools work with any macOS application that supports accessibility APIs. Native integrations are available for Calendar, Mail, Notes, Reminders, Contacts, Maps, and Messages.
+
+### Technical Questions
+
+**Q: What's the difference between stdio and SSE modes?**
+A: Stdio mode uses direct process communication (recommended for Claude Desktop and Cursor). SSE mode uses HTTP Server-Sent Events (required for Raycast AI and web-based clients).
+
+**Q: How do I change the SSE port from 35729?**
+A: Currently, the SSE port is fixed at 35729. Port configuration will be available in a future update.
+
+**Q: Why do some operations seem slow?**
+A: UI automation requires time for visual elements to load and respond. Macuse includes appropriate delays to ensure reliable operation across different apps and system speeds.
+
+**Q: Can I automate apps that require admin privileges?**
+A: Macuse can interact with apps that have elevated privileges, but you may need to grant additional permissions or run those apps normally (not with sudo).
+
+### Privacy & Security
+
+**Q: What permissions does Macuse need and why?**
+A: Macuse needs Accessibility (for UI control), Calendar/Contacts/Reminders (for native integrations), and optionally Location Services (for Maps features). These permissions are used only for the features you actively use.
+
+**Q: How secure is the token authentication?**
+A: Tokens are securely generated and stored locally. They're bound to your specific Mac using hardware fingerprinting. Tokens can be regenerated at any time.
+
+## Updates & Maintenance
+
+### Checking for Updates
+
+Macuse automatically checks for updates when launched. You can also manually check:
+1. Open the Macuse app
+2. Go to **About** section
+3. Click **Check for Updates**
+
+### Installing Updates
+
+When an update is available:
+1. Click **Download** in the update notification
+2. Quit Macuse completely
+3. Replace the old app with the new version
+4. Launch the new version and verify your settings
+
+### Version History
+
+Current version: **0.9.0**
+
+**Recent Changes:**
+- Added Location Services and Maps integration
+- Enhanced permission handling
+- Improved Messages and Contacts toolboxes
+- Better error handling and diagnostics
+
+For detailed changelog, see [CHANGELOG.md](CHANGELOG.md)
+
+### Backup & Data
+
+Your settings and tokens are automatically backed up in:
+```
+~/Library/Application Support/Macuse/
+```
+
+Before major updates, consider backing up this folder.
+
+## Known Limitations
+
+### Application Compatibility
+
+**Fully Supported Apps:**
+- All native macOS apps (Calendar, Mail, Notes, Reminders, Contacts, Messages)
+- Most standard macOS applications
+- Apps that properly implement accessibility APIs
+
+**Limited Support:**
+- Some third-party apps may have restricted accessibility access
+- Apps with non-standard UI elements may require specific targeting
+- Web content within apps requires specific element identification
+
+### Performance Considerations
+
+- **UI Operations**: Some actions may take 1-2 seconds for visual feedback
+- **Large Data Sets**: Operations on thousands of emails/contacts may be slower
+- **Concurrent Requests**: Multiple simultaneous AI clients may experience delays
+- **System Resources**: Heavy UI automation may temporarily increase CPU usage
+
+### Security Restrictions
+
+- **Sandboxed Apps**: Some Mac App Store apps have limited accessibility
+- **System Dialogs**: Cannot automate password prompts or security dialogs
+- **Admin Operations**: Cannot perform actions requiring administrator privileges
+- **Protected Content**: Cannot access password fields or secure payment forms
+
+### Feature Limitations
+
+- **Cross-Application Drag & Drop**: Not currently supported
+- **File Dialog Automation**: Limited support for complex file operations
+- **Multi-Monitor**: UI targeting works best on primary display
+- **VoiceOver Integration**: May conflict with running VoiceOver
+
+## Resources
+
+- [Issue Tracker](https://github.com/macuse-app/macuse/issues)
+- [Support](mailto:support@macuse.app)
 
 ---
 
