@@ -149,7 +149,7 @@ Macuse requires the following macOS permissions to function properly:
 ### UI Inspector (4 tools)
 
 - `get_ui_hierarchy` - Retrieve complete UI structure of any app
-- `find_ui_elements` - Search for UI elements by attributes
+- `find_ui_elements` - Search for UI elements by XPath expressions
 - `get_focused_element` - Get the currently focused UI element
 - `get_visible_text` - Extract all visible text from an app
 
@@ -163,31 +163,28 @@ Macuse requires the following macOS permissions to function properly:
 - `keyboard_press_key` - Simulate key presses with modifiers
 - `type_text` - Type text into focused fields
 
-### Calendar Management (7 tools)
+### Calendar Management (5 tools)
 
-- `check_calendar_permission` - Check Calendar access permissions
 - `get_calendars` - List all available calendars
-- `get_calendar_events` - Search events with advanced filters
+- `search_calendar_events` - Search events with advanced filters and ID support
 - `create_calendar_event` - Create new calendar events
-- `get_calendar_event` - Get specific event details
 - `update_calendar_event` - Modify existing events
 - `delete_calendar_event` - Remove calendar events
 
 ### Contacts Management (3 tools)
 
 - `check_contacts_permission` - Check Contacts access permissions
-- `get_all_contacts` - Get all contacts from the address book
 - `search_contacts` - Search contacts by name, email, or other attributes
+- `get_all_contacts` - Get all contacts from the address book
 
 ### Location Services (1 tool)
 
 - `get_current_location` - Get the current GPS location
 
-### Mail Control (12 tools)
+### Mail Control (11 tools)
 
 - `check_mail_permission` - Check Mail app permissions
 - `get_mail_accounts` - List configured mail accounts
-- `get_mails` - Search messages with filters
 - `get_mail_content` - Read full email content
 - `create_mail` - Compose and send emails
 - `reply_mail` - Reply to email threads
@@ -207,28 +204,23 @@ Macuse requires the following macOS permissions to function properly:
 
 ### Messages Control (5 tools)
 
-- `check_messages_permission` - Check Messages app permissions
 - `search_chats` - Search for message conversations
 - `search_messages` - Search for specific messages
 - `get_chat` - Get details of a specific chat conversation
+- `get_chats` - Get details for multiple chat conversations
 - `send_message` - Send text messages via Messages app
 
-### Notes Management (8 tools)
+### Notes Management (4 tools)
 
-- `check_notes_permission` - Check Notes access permissions
-- `get_notes` - Search notes with filters
-- `get_note` - Get full note content (HTML)
-- `create_note` - Create new notes
-- `update_note` - Update existing notes
+- `search_notes` - Search notes with content preview options
+- `read_note` - Read full content of notes (supports batch)
 - `delete_note` - Move notes to trash
-- `restore_note` - Restore deleted notes
 - `open_note` - Open notes in Notes app
 
-### Reminders Control (6 tools)
+### Reminders Control (5 tools)
 
-- `check_reminders_permission` - Check Reminders permissions
 - `get_reminder_lists` - List all reminder lists
-- `get_reminders` - Search reminders with filters
+- `get_reminders` - Search reminders with flexible filtering
 - `create_reminder` - Create new reminders
 - `update_reminder` - Update existing reminders
 - `delete_reminder` - Delete reminders
@@ -423,44 +415,6 @@ A: Macuse needs Accessibility (for UI control), Calendar/Contacts/Reminders (for
 **Q: How secure is the token authentication?**
 A: Tokens are securely generated and stored locally. They're bound to your specific Mac using hardware fingerprinting. Tokens can be regenerated at any time.
 
-## Updates & Maintenance
-
-### Checking for Updates
-
-Macuse automatically checks for updates when launched. You can also manually check:
-1. Open the Macuse app
-2. Go to **About** section
-3. Click **Check for Updates**
-
-### Installing Updates
-
-When an update is available:
-1. Click **Download** in the update notification
-2. Quit Macuse completely
-3. Replace the old app with the new version
-4. Launch the new version and verify your settings
-
-### Version History
-
-Current version: **0.9.0**
-
-**Recent Changes:**
-- Added Location Services and Maps integration
-- Enhanced permission handling
-- Improved Messages and Contacts toolboxes
-- Better error handling and diagnostics
-
-For detailed changelog, see [CHANGELOG.md](CHANGELOG.md)
-
-### Backup & Data
-
-Your settings and tokens are automatically backed up in:
-```
-~/Library/Application Support/Macuse/
-```
-
-Before major updates, consider backing up this folder.
-
 ## Known Limitations
 
 ### Application Compatibility
@@ -498,7 +452,6 @@ Before major updates, consider backing up this folder.
 
 ## Resources
 
-- [Issue Tracker](https://github.com/macuse-app/macuse/issues)
 - [Support](mailto:support@macuse.app)
 
 ---
