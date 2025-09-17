@@ -1,0 +1,51 @@
+{
+  "dxt_version": "0.1",
+  "name": "macuse-mcp",
+  "display_name": "Macuse",
+  "version": "0.1.0",
+  "description": "Connect your MCP client to Macuse on macOS.",
+  "long_description": "Install this plugin to connect your MCP client (e.g., Claude Desktop) with Macuse on your Mac. It follows the settings you choose in Macuse (transport mode, network, toolboxes). Provide your Access Token from Macuse Settings. If your client does not support .mcpb, use one‑click setup or copy configuration directly from Macuse.",
+  "author": {
+    "name": "Macuse Team",
+    "url": "https://macuse.app"
+  },
+  "homepage": "https://macuse.app",
+  "documentation": "https://macuse.app",
+  "support": "https://github.com/macuse-app/macuse/issues",
+  "keywords": ["mcp", "model-context-protocol", "macuse", "macos", "automation"],
+  "license": "MIT",
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=20.8.1"
+    }
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "build/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/build/index.js"],
+      "env": {
+        "ACCESS_TOKEN": "${user_config.access_token}",
+        "MACUSE_BINARY": "${user_config.macuse_binary}"
+      }
+    }
+  },
+  "user_config": {
+    "access_token": {
+      "type": "string",
+      "title": "Macuse Access Token",
+      "description": "Copy this token from Macuse → Settings → MCP.",
+      "required": true
+    },
+    "macuse_binary": {
+      "type": "string",
+      "title": "Macuse Binary Path",
+      "description": "Path to the Macuse executable (default shown).",
+      "required": false,
+      "default": "/Applications/Macuse.app/Contents/MacOS/macuse"
+    }
+  }
+}

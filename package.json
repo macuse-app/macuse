@@ -1,0 +1,44 @@
+{
+  "name": "@macuse/mcp-proxy",
+  "version": "0.1.0",
+  "description": "MCP server proxy for Macuse",
+  "type": "module",
+  "main": "build/index.js",
+  "bin": {
+    "macuse-mcp-proxy": "bin/cli.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "start": "node build/index.js",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "clean": "rm -rf build",
+    "pack": "npm run build && npx @anthropic-ai/mcpb pack"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "macuse",
+    "proxy"
+  ],
+  "author": "Macuse Team",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.3",
+    "zod": "^3.23.8",
+    "zod-to-json-schema": "^3.24.6"
+  },
+  "devDependencies": {
+    "@anthropic-ai/mcpb": "^1.1.0",
+    "@biomejs/biome": "^2.2.2",
+    "@types/node": "^22.10.5",
+    "tsup": "^8.5.0",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=20.8.1"
+  },
+  "packageManager": "pnpm@10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac"
+}
