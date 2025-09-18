@@ -1,7 +1,7 @@
 {
-  "name": "@macuse/mcp-proxy",
+  "name": "macuse-mcp",
   "version": "0.1.0",
-  "description": "MCP server proxy for Macuse",
+  "description": "Macuse for macOS — bridge AI assistants with native apps via MCP; this package lets MCP clients connect to your Macuse app.",
   "type": "module",
   "main": "build/index.js",
   "bin": {
@@ -15,16 +15,24 @@
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
     "clean": "rm -rf build",
-    "pack": "npm run build && npx @anthropic-ai/mcpb pack"
+    "prepublishOnly": "npm run clean && npm run build",
+    "pack": "npm run build && npx @anthropic-ai/mcpb pack",
+    "mcpb:build": "CLIENT_TYPE=mcpb tsup",
+    "mcpb:pack": "npm run mcpb:build && mcpb pack"
   },
   "keywords": [
-    "mcp",
-    "model-context-protocol",
     "macuse",
-    "proxy"
+    "macos",
+    "automation",
+    "mcp",
+    "model-context-protocol"
   ],
   "author": "Macuse Team",
   "license": "MIT",
+  "homepage": "https://macuse.app",
+  "bugs": {
+    "url": "https://github.com/macuse-app/macuse/issues"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.3",
     "zod": "^3.23.8",
@@ -33,6 +41,10 @@
   "devDependencies": {
     "@anthropic-ai/mcpb": "^1.1.0",
     "@biomejs/biome": "^2.2.2",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^7.1.0",
+    "@semantic-release/git": "^10.0.1",
+    "semantic-release": "^24.2.7",
     "@types/node": "^22.10.5",
     "tsup": "^8.5.0",
     "typescript": "^5.7.2"

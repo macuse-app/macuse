@@ -3,8 +3,8 @@
   "name": "macuse-mcp",
   "display_name": "Macuse",
   "version": "0.1.0",
-  "description": "Connect your MCP client to Macuse on macOS.",
-  "long_description": "Install this plugin to connect your MCP client (e.g., Claude Desktop) with Macuse on your Mac. It follows the settings you choose in Macuse (transport mode, network, toolboxes). Provide your Access Token from Macuse Settings. If your client does not support .mcpb, use one‑click setup or copy configuration directly from Macuse.",
+  "description": "Macuse brings AI superpowers to macOS via the Model Context Protocol (MCP).",
+  "long_description": "Macuse is a desktop application that bridges AI assistants with native macOS apps and system capabilities through MCP. Use this package to connect your MCP client to the Macuse app on your Mac. It respects the transport, network, and toolbox settings you choose in Macuse. If your client supports .mcpb, install this package; otherwise, use one‑click setup or copy configuration directly from Macuse.",
   "author": {
     "name": "Macuse Team",
     "url": "https://macuse.app"
@@ -16,7 +16,7 @@
   "license": "MIT",
   "compatibility": {
     "claude_desktop": ">=0.10.0",
-    "platforms": ["darwin", "win32", "linux"],
+    "platforms": ["darwin"],
     "runtimes": {
       "node": ">=20.8.1"
     }
@@ -36,13 +36,13 @@
   "user_config": {
     "access_token": {
       "type": "string",
-      "title": "Macuse Access Token",
-      "description": "Copy this token from Macuse → Settings → MCP.",
+      "title": "Access Token",
+      "description": "Copy this token from Macuse",
       "required": true
     },
     "macuse_binary": {
       "type": "string",
-      "title": "Macuse Binary Path",
+      "title": "Binary Path",
       "description": "Path to the Macuse executable (default shown).",
       "required": false,
       "default": "/Applications/Macuse.app/Contents/MacOS/macuse"

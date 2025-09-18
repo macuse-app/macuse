@@ -1,0 +1,59 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version bump type (leave empty for automatic based on commits)'
+        required: false
+        default: ''
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint and format check
+        run: pnpm run lint
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Pack MCPB
+        run: pnpm run mcpb:pack
+
+      - name: Update server.json (identifier and sha256)
+        run: |
+          SHA256=$(openssl dgst -sha256 macuse.mcpb | awk '{print $2}')
+          node -e "const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); const s=fs.existsSync('server.json')?JSON.parse(fs.readFileSync('server.json','utf8')):{}; s.identifier=pkg.version; s.file_sha256='${SHA256}'; fs.writeFileSync('server.json', JSON.stringify(s,null,2)+'\n'); console.log('server.json updated with identifier', pkg.version, 'and sha256', '${SHA256}');"
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release

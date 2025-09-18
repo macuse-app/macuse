@@ -15,10 +15,12 @@
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/platform-macOS_10.15+-lightgreen" alt="Platform"></a>
   <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/MCP-Compatible-green" alt="MCP Compatible"></a>
+  <a href="#releases"><img src="https://img.shields.io/badge/CI-GitHub%20Releases-blue" alt="Releases"></a>
 </p>
 
 <p align="center">
   <a href="https://macuse.app/download/">Download</a> •
+  <a href="#releases">Releases</a> •
   <a href="https://macuse.app">Website</a>
 </p>
 
@@ -129,3 +131,17 @@ Streamable HTTP
 - Website: https://macuse.app/
 - Download: https://macuse.app/download/
 - Model Context Protocol: https://modelcontextprotocol.io/
+
+## Releases
+
+- Automated release via GitHub Actions using semantic-release.
+- Trigger: run the "Release" workflow manually (Actions → Release → Run workflow). Version is inferred from conventional commits on the main branch.
+- Output: GitHub Release with asset:
+  - `macuse.mcpb` (MCP plugin bundle)
+- Manifest version is synced from `package.json` during the pipeline.
+
+Local packaging (optional):
+
+```bash
+pnpm mcpb:pack   # build + produce macuse.mcpb
+```
