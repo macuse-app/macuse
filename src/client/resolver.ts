@@ -21,6 +21,14 @@ export interface MacuseTransportResult {
  * Resolve Macuse transport configuration by calling --get-config
  */
 export async function resolveMacuseTransport(): Promise<MacuseTransportResult> {
+  // Macuse only supports macOS (darwin). Short-circuit on other platforms.
+  if (process.platform !== "darwin") {
+    return {
+      success: false,
+      error: "Macuse supports macOS (darwin) only",
+    };
+  }
+
   try {
     // Try to get config from Macuse binary
     const output = execSync(`"${config.macuseBinary}" --get-config`, {
@@ -43,8 +51,22 @@ export async function resolveMacuseTransport(): Promise<MacuseTransportResult> {
       transport: transportConfig,
     };
   } catch (error) {
+    // If the macuse binary is not found, signal explicitly so caller can
+    // guide the user to download it instead of silently falling back.
+    const err = error as NodeJS.ErrnoException;
+    const msg = String(err?.message || err);
+
+    const isNotFound = err?.code === "ENOENT" || /not found|ENOENT/i.test(msg);
+
+    if (isNotFound) {
+      return {
+        success: false,
+        error: "Macuse executable not found",
+      };
+    }
+
     if (config.debug) {
-      console.error(`Failed to get Macuse config: ${error}`);
+      console.error(`Failed to get Macuse config: ${msg}`);
     }
 
     // Fallback: try to probe default transports

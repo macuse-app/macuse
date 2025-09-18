@@ -1,3 +1,4 @@
+import { spawn } from "node:child_process";
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { SSEClientTransport } from "@modelcontextprotocol/sdk/client/sse.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
@@ -24,7 +25,26 @@ export class MacuseClient {
     const result = await resolveMacuseTransport();
 
     if (!result.success || !result.transport) {
-      throw new Error(`Failed to resolve Macuse transport: ${result.error}`);
+      const errorMsg = result.error ?? "Unknown error";
+      const platform = process.platform;
+      if (/macos.*only|darwin.*only/i.test(errorMsg) || platform !== "darwin") {
+        throw new Error(
+          `Macuse supports macOS only. Current platform: ${platform}`,
+        );
+      }
+      if (/executable not found/i.test(errorMsg)) {
+        if (platform === "darwin") {
+          this.openDownloadPage();
+          // Provide a clear, user-facing message
+          throw new Error(
+            "Macuse executable not found. Opened https://macuse.app/download/ in your browser. Please install and try again.",
+          );
+        }
+        throw new Error(
+          `Macuse supports macOS only. Current platform: ${platform}`,
+        );
+      }
+      throw new Error(`Failed to resolve Macuse transport: ${errorMsg}`);
     }
 
     this.transportConfig = result.transport;
@@ -141,5 +161,27 @@ export class MacuseClient {
     }
     this.transport = null;
     this.transportConfig = null;
+  }
+
+  private openDownloadPage() {
+    const url = "https://macuse.app/download/";
+
+    // macOS: open, Linux: xdg-open, Windows: start
+    const platform = process.platform;
+    try {
+      if (platform === "darwin") {
+        spawn("open", [url], { stdio: "ignore", detached: true }).unref();
+      }
+      // eslint-disable-next-line no-console
+      console.error(
+        `Macuse is not installed. Download from: ${url} \nAfter installing, rerun this command.`,
+      );
+    } catch {
+      // As a fallback, at least print the URL
+      // eslint-disable-next-line no-console
+      console.error(
+        `Macuse is not installed. Please open and download: ${url}`,
+      );
+    }
   }
 }
