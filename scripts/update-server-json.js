@@ -18,12 +18,20 @@ try {
     ? JSON.parse(readFileSync("server.json", "utf8"))
     : {};
 
-  server.identifier = pkg.version;
-  server.file_sha256 = hash;
+  // Update version and package information
+  server.version = pkg.version;
+
+  // Update the first package entry (MCPB package)
+  if (server.packages && server.packages.length > 0) {
+    server.packages[0].version = pkg.version;
+    server.packages[0].identifier = `https://github.com/macuse-app/macuse/releases/download/v${pkg.version}/${file}`;
+    server.packages[0].file_sha256 = hash;
+  }
 
   writeFileSync("server.json", `${JSON.stringify(server, null, 2)}\n`);
   console.log("server.json updated:", {
-    identifier: pkg.version,
+    version: pkg.version,
+    package_identifier: server.packages?.[0]?.identifier,
     file_sha256: hash,
   });
 } catch (err) {

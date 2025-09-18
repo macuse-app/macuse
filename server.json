@@ -12,8 +12,8 @@
     {
       "registry_type": "mcpb",
       "version": "1.0.0",
-      "identifier": "https://github.com/you/your-repo/releases/download/v1.0.0/server.mcpb",
-      "file_sha256": "fe333e598595000ae021bd27117db32ec69af6987f507ba7a63c90638ff633ce"
+      "identifier": "https://github.com/macuse-app/macuse/releases/download/v1.0.0/macuse.mcpb",
+      "file_sha256": "485bd00b3fd3db453edd8a3f573517924bb0e58134c2e070cf06075129662461"
     }
   ]
 }
