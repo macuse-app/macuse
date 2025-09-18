@@ -26,6 +26,9 @@ try {
     server.packages[0].version = pkg.version;
     server.packages[0].identifier = `https://github.com/macuse-app/macuse/releases/download/v${pkg.version}/macuse-${pkg.version}.mcpb`;
     server.packages[0].file_sha256 = hash;
+    server.packages[0].transport = {
+      type: "stdio",
+    };
   }
 
   writeFileSync("server.json", `${JSON.stringify(server, null, 2)}\n`);
