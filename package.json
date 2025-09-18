@@ -16,9 +16,7 @@
     "format": "biome format --write .",
     "clean": "rm -rf build",
     "prepublishOnly": "npm run clean && npm run build",
-    "pack": "npm run build && npx @anthropic-ai/mcpb pack",
-    "mcpb:build": "CLIENT_TYPE=mcpb tsup",
-    "mcpb:pack": "npm run mcpb:build && mcpb pack"
+    "pack": "npm run build && npx @anthropic-ai/mcpb pack"
   },
   "keywords": [
     "macuse",

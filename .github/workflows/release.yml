@@ -45,8 +45,6 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      # Packing and server.json update are handled in semantic-release prepare
-
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
