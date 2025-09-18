@@ -1,6 +1,6 @@
 {
   "name": "macuse-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Bridges AI assistants with native macOS functionality through the Model Context Protocol (MCP).",
   "type": "module",
   "main": "build/index.js",
