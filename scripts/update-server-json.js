@@ -24,7 +24,7 @@ try {
   // Update the first package entry (MCPB package)
   if (server.packages && server.packages.length > 0) {
     server.packages[0].version = pkg.version;
-    server.packages[0].identifier = `https://github.com/macuse-app/macuse/releases/download/v${pkg.version}/${file}`;
+    server.packages[0].identifier = `https://github.com/macuse-app/macuse/releases/download/v${pkg.version}/macuse-${pkg.version}.mcpb`;
     server.packages[0].file_sha256 = hash;
   }
 
