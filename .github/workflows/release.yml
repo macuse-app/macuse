@@ -45,13 +45,7 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      - name: Pack MCPB
-        run: pnpm run mcpb:pack
-
-      - name: Update server.json (identifier and sha256)
-        run: |
-          SHA256=$(openssl dgst -sha256 macuse.mcpb | awk '{print $2}')
-          node -e "const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); const s=fs.existsSync('server.json')?JSON.parse(fs.readFileSync('server.json','utf8')):{}; s.identifier=pkg.version; s.file_sha256='${SHA256}'; fs.writeFileSync('server.json', JSON.stringify(s,null,2)+'\n'); console.log('server.json updated with identifier', pkg.version, 'and sha256', '${SHA256}');"
+      # Packing and server.json update are handled in semantic-release prepare
 
       - name: Release
         env:

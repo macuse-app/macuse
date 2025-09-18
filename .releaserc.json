@@ -5,9 +5,15 @@
     "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
     [
+      "@semantic-release/npm",
+      {
+        "npmPublish": false
+      }
+    ],
+    [
       "@semantic-release/exec",
       {
-        "prepareCmd": "node scripts/sync-manifest-version.js && pnpm run mcpb:pack && node -e \"const fs=require('fs');const m=fs.readdirSync('.').filter(f=>f.endsWith('.mcpb'))[0];if(m&&m!=='macuse.mcpb')fs.renameSync(m,'macuse.mcpb');\""
+        "prepareCmd": "node scripts/sync-manifest-version.js && pnpm run mcpb:pack && node -e \"const fs=require('fs');const m=fs.readdirSync('.').filter(f=>f.endsWith('.mcpb'))[0];if(m&&m!=='macuse.mcpb')fs.renameSync(m,'macuse.mcpb');\" && node scripts/update-server-json.js"
       }
     ],
     [

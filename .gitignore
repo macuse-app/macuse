@@ -68,3 +68,4 @@ Thumbs.db
 
 # Build artifacts
 *.mcpb
+.mcpregistry_*
