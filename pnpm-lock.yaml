@@ -33,6 +33,9 @@ importers:
       '@semantic-release/git':
         specifier: ^10.0.1
         version: 10.0.1(semantic-release@24.2.8(typescript@5.9.2))
+      '@semantic-release/npm':
+        specifier: ^12.0.0
+        version: 12.0.2(semantic-release@24.2.8(typescript@5.9.2))
       '@types/node':
         specifier: ^22.10.5
         version: 22.18.5
