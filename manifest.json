@@ -2,7 +2,7 @@
   "dxt_version": "0.1",
   "name": "macuse-mcp",
   "display_name": "Macuse",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Bridges AI assistants with native macOS functionality through the Model Context Protocol (MCP).",
   "long_description": "Macuse is a desktop application that bridges AI assistants with native macOS apps and system capabilities through MCP. Use this package to connect your MCP client to the Macuse app on your Mac. It respects the transport, network, and toolbox settings you choose in Macuse. If your client supports .mcpb, install this package; otherwise, use one‑click setup or copy configuration directly from Macuse.",
   "author": {
