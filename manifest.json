@@ -12,7 +12,13 @@
   "homepage": "https://macuse.app",
   "documentation": "https://macuse.app",
   "support": "https://github.com/macuse-app/macuse/issues",
-  "keywords": ["mcp", "model-context-protocol", "macuse", "macos", "automation"],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "macuse",
+    "macos",
+    "automation"
+  ],
   "license": "MIT",
   "compatibility": {
     "claude_desktop": ">=0.10.0",
