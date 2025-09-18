@@ -1,0 +1,51 @@
+{
+  "dxt_version": "0.1",
+  "name": "macuse-mcp",
+  "display_name": "Macuse",
+  "version": "0.1.0",
+  "description": "Macuse brings AI superpowers to macOS via the Model Context Protocol (MCP).",
+  "long_description": "Macuse is a desktop application that bridges AI assistants with native macOS apps and system capabilities through MCP. Use this package to connect your MCP client to the Macuse app on your Mac. It respects the transport, network, and toolbox settings you choose in Macuse. If your client supports .mcpb, install this package; otherwise, use one‑click setup or copy configuration directly from Macuse.",
+  "author": {
+    "name": "Macuse Team",
+    "url": "https://macuse.app"
+  },
+  "homepage": "https://macuse.app",
+  "documentation": "https://macuse.app",
+  "support": "https://github.com/macuse-app/macuse/issues",
+  "keywords": ["mcp", "model-context-protocol", "macuse", "macos", "automation"],
+  "license": "MIT",
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": ["darwin"],
+    "runtimes": {
+      "node": ">=20.8.1"
+    }
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "build/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/build/index.js"],
+      "env": {
+        "ACCESS_TOKEN": "${user_config.access_token}",
+        "MACUSE_BINARY": "${user_config.macuse_binary}"
+      }
+    }
+  },
+  "user_config": {
+    "access_token": {
+      "type": "string",
+      "title": "Access Token",
+      "description": "Copy this token from Macuse",
+      "required": true
+    },
+    "macuse_binary": {
+      "type": "string",
+      "title": "Binary Path",
+      "description": "Path to the Macuse executable (default shown).",
+      "required": false,
+      "default": "/Applications/Macuse.app/Contents/MacOS/macuse"
+    }
+  }
+}

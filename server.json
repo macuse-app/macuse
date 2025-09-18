@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.macuse-app/macuse",
+  "description": "Macuse is a desktop app that bridges AI assistants with native macOS functionality through the Model Context Protocol (MCP). Use this package to connect your MCP client to Macuse using the settings you configure in the app.",
+  "status": "active",
+  "repository": {
+    "url": "https://github.com/macuse-app/macuse",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registry_type": "mcpb",
+      "identifier": "https://github.com/you/your-repo/releases/download/v1.0.0/server.mcpb",
+      "file_sha256": "fe333e598595000ae021bd27117db32ec69af6987f507ba7a63c90638ff633ce"
+    }
+  ]
+}
